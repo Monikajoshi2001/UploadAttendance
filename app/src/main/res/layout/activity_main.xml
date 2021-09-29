@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Month : "
+        android:textSize="25dp"
+        android:id="@+id/month_text"/>
+    <EditText
+        android:id="@+id/month_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Month"
+        android:textSize="20dp"
+        android:layout_toRightOf="@id/month_text"/>
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/month_text"
+        android:text="Lectures : "
+        android:textSize="25dp"
+        android:id="@+id/lectures_text"/>
+    <EditText
+        android:id="@+id/lectures_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="No of Lectures"
+        android:textSize="20dp"
+        android:layout_below="@id/month_edit"
+        android:layout_toRightOf="@id/lectures_text"/>
+
+    <Button
+        android:id="@+id/Upload_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Upload File"/>
+
+
+</RelativeLayout>
