@@ -45,5 +45,12 @@
         android:layout_centerInParent="true"
         android:text="Upload File"/>
 
+    <Button
+        android:id="@+id/Submit_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/Upload_Button"
+        android:layout_centerHorizontal="true"
+        android:text="Submit"/>
 
 </RelativeLayout>

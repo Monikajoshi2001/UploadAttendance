@@ -7,19 +7,18 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.FileUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.uploadfile.API.M.service.UserClient;
+import com.example.uploadfile.API.FileModel;
+import com.example.uploadfile.API.UserClient;
 import com.example.uploadfile.API.ServiceGenerator;
 
 import java.io.File;
@@ -31,8 +30,6 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
     private static final int MY_PERMISSION_REQUEST=100;
@@ -91,9 +88,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void uploadFile(Uri uri) {
-        // create upload service client
-        UserClient service =
-                ServiceGenerator.createService(UserClient.class);
+
 
        File originalFile= new File(uri.getPath());
         //File file = FileUtils.getFile(MainActivity.this, uri);
@@ -110,18 +105,19 @@ public class MainActivity extends AppCompatActivity {
         RequestBody month = RequestBody.create(okhttp3.MultipartBody.FORM, Month_number.getText().toString());
         RequestBody total_lectures = RequestBody.create(okhttp3.MultipartBody.FORM, Lectures.getText().toString());
 
+        UserClient service= ServiceGenerator.getClient().create(UserClient.class);
         // finally, execute the request
-        Call<ResponseBody> call = service.uploadExcel(month,total_lectures,body);
-        call.enqueue(new Callback<ResponseBody>() {
+        Call<FileModel> call = service.uploadExcel(month,total_lectures,body);
+        call.enqueue(new Callback<FileModel>() {
             @Override
-            public void onResponse(Call<ResponseBody> call,
-                                   Response<ResponseBody> response) {
+            public void onResponse(Call<FileModel> call,
+                                   Response<FileModel> response) {
                 Toast.makeText(MainActivity.this,"Success",Toast.LENGTH_LONG).show();
                 Log.v("Upload", "success");
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<FileModel> call, Throwable t) {
                 Toast.makeText(MainActivity.this,"Failure",Toast.LENGTH_LONG).show();
                 Log.e("Upload error:", t.getMessage());
             }
